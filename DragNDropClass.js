@@ -1,4 +1,4 @@
-var KWDragDrop_IsIE = (document.all && window.ActiveXObject) ? true : false;
+var DragDrop_IsIE = (document.all && window.ActiveXObject) ? true : false;
 var IsChrome = navigator.userAgent.toLowerCase().indexOf('chrome') != -1;
 var IsFireFox = navigator.userAgent.toLowerCase().indexOf('firefox') != -1;
 var IsOpera = navigator.userAgent.toLowerCase().indexOf('opera') != -1;
@@ -38,7 +38,7 @@ Function.prototype.bind = function () {
     }
 };
 
-function KWDragDropClass(wnd) {
+function DragDropClass(wnd) {
     var _that = this;
 
     this.IsDrag = false;
@@ -376,7 +376,7 @@ function KWDragDropClass(wnd) {
         if (typeof top.DetectZoom == 'object' && typeof top.DetectZoom.zoom == 'function') {
             zoom = top.DetectZoom.zoom();
         }
-        if (KWDragDrop_IsIE || IsOpera || IsEdge) {
+        if (DragDrop_IsIE || IsOpera || IsEdge) {
             x = e.screenX - _that._window.screenLeft * zoom;
             y = e.screenY - _that._window.screenTop * zoom + 2;
         }
@@ -595,13 +595,13 @@ function KWDragDropClass(wnd) {
         return false;
     };
     this._createDiv = function () {
-        var _dragdropTip = top.document.getElementById('div_KWDragDrop');
+        var _dragdropTip = top.document.getElementById('div_DragDrop');
         if (_dragdropTip) {
             this.Div = _dragdropTip;
             this.Div.innerHTML = "";
         } else {
             this.Div = document.createElement("Div");
-            this.Div.id = "div_KWDragDrop";
+            this.Div.id = "div_DragDrop";
             this.Div.style.position = "absolute";
             this.Div.style.border = "solid 2px #2e6da4";
             this.Div.style.backgroundColor = "#d9edf7";
@@ -648,7 +648,7 @@ function KWDragDropClass(wnd) {
         var left = 0; var top = 0;
         var funContinue = function (tar) {
             if (!tar.parentNode) return false;
-            if (!KWDragDrop_IsIE) return tar.nodeName != "BODY";
+            if (!DragDrop_IsIE) return tar.nodeName != "BODY";
             return true;
         };
         while (funContinue(target)) {
@@ -759,4 +759,4 @@ function KWDragDropClass(wnd) {
         this.OrderPosition = [0, 1];
     };
 }
-var KWDragDrop = new KWDragDropClass(window);
+var DragDrop = new DragDropClass(window);
