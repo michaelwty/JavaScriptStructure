@@ -1,15 +1,15 @@
-var TxJsCtl = {};
-TxJsCtl.QuickSearchString = (typeof (LOther) != "undefined" && LOther.QuickSearchString) ? LOther.QuickSearchString : "Quick Search...";
-TxJsCtl.NextItemString = (typeof (LOther) != "undefined" && LOther.NextItemString) ? LOther.NextItemString : "Next 50 Items";
-TxJsCtl.PrevItemString = (typeof (LOther) != "undefined" && LOther.PrevItemString) ? LOther.PrevItemString : "Previous 50 Items";
-TxJsCtl.SelectAllString = (typeof (LOther) != "undefined" && LOther.SelectAllString) ? LOther.SelectAllString : "Select All";
+var DropdownCtl = {};
+DropdownCtl.QuickSearchString = (typeof (LOther) != "undefined" && LOther.QuickSearchString) ? LOther.QuickSearchString : "Quick Search...";
+DropdownCtl.NextItemString = (typeof (LOther) != "undefined" && LOther.NextItemString) ? LOther.NextItemString : "Next 50 Items";
+DropdownCtl.PrevItemString = (typeof (LOther) != "undefined" && LOther.PrevItemString) ? LOther.PrevItemString : "Previous 50 Items";
+DropdownCtl.SelectAllString = (typeof (LOther) != "undefined" && LOther.SelectAllString) ? LOther.SelectAllString : "Select All";
 
-TxJsCtl.ITEM_VALUE_SELECTALL = -99999999;
-TxJsCtl.ITEM_TEXT_SELECTALL = TxJsCtl.SelectAllString; //"Select All";
-TxJsCtl.ITEM_TITLE_SELECTALL = "{All Selected}";
-TxJsCtl.NUMBER_PER_PAGE = 50;
+DropdownCtl.ITEM_VALUE_SELECTALL = -99999999;
+DropdownCtl.ITEM_TEXT_SELECTALL = DropdownCtl.SelectAllString; //"Select All";
+DropdownCtl.ITEM_TITLE_SELECTALL = "{All Selected}";
+DropdownCtl.NUMBER_PER_PAGE = 50;
 
-TxJsCtl.StringBuilder = function (txt) {
+DropdownCtl.StringBuilder = function (txt) {
     this._parts = (typeof (txt) !== 'undefined' && initialText !== null && txt !== '') ? [txt.toString()] : [];
     this._value = {}; this._len = 0;
     this.append = function (text) { this._parts[this._parts.length] = text; }
@@ -30,7 +30,7 @@ TxJsCtl.StringBuilder = function (txt) {
         } return val[p];
     }
 }
-TxJsCtl.HtmlEncode = function (str) {
+DropdownCtl.HtmlEncode = function (str) {
     if (typeof (str) == "object") return str;
     if (str == null || typeof (str) == "undefined" || !str) return "";
     if (typeof (str) == "number") return str;
@@ -41,26 +41,26 @@ TxJsCtl.HtmlEncode = function (str) {
     str = str.replace(/\'/g, "&#39;");
     return str;
 }
-TxJsCtl.IsInArray = function (arr, val) {
+DropdownCtl.IsInArray = function (arr, val) {
     for (var i = 0, j = arr.length; i < j; i++) {
         if (arr[i] == val)
             return true;
     }
     return false;
 }
-TxJsCtl.FindInArray = function (arr, val) {
+DropdownCtl.FindInArray = function (arr, val) {
     for (var i = 0, j = arr.length; i < j; i++) {
         if (arr[i] == val)
             return i;
     }
     return -1;
 }
-TxJsCtl.isNumber = function (str) {
+DropdownCtl.isNumber = function (str) {
     var pattern = /^\d+$/;
     return pattern.test(str);
 },
-TxJsCtl.isIE = function () { return (!!window.ActiveXObject || "ActiveXObject" in window) }
-TxJsCtl.isIpadIpohne = function () {return (navigator.userAgent.toLowerCase().indexOf('ipad') != -1 || navigator.userAgent.toLowerCase().indexOf('iphone') != -1 || navigator.userAgent.toLowerCase().indexOf('android') != -1) }
+DropdownCtl.isIE = function () { return (!!window.ActiveXObject || "ActiveXObject" in window) }
+DropdownCtl.isIpadIpohne = function () {return (navigator.userAgent.toLowerCase().indexOf('ipad') != -1 || navigator.userAgent.toLowerCase().indexOf('iphone') != -1 || navigator.userAgent.toLowerCase().indexOf('android') != -1) }
 String.prototype.endsWith = function String$endsWith(suffix) { return (this.substr(this.length - suffix.length) === suffix); }
 String.prototype.startsWith = function String$startsWith(prefix) { return (this.substr(0, prefix.length) === prefix); }
 String.prototype.trim = function String$trim() { return this.replace(/^\s+|\s+$/g, ''); }
@@ -84,13 +84,13 @@ String._toFormattedString = function String$_toFormattedString(useLocale, args) 
         i = close + 1;
     } return result;
 }
-TxJsCtl._cancelBubble = function (e) {
+DropdownCtl._cancelBubble = function (e) {
     if (e.stopPropagation) e.stopPropagation();
     else e.cancelBubble = true;
 }
-TxJsCtl.getPosition = function (obj) { if (null == obj) return new Array(); var ary = new Array(); ary[0] = obj.offsetLeft; ary[1] = obj.offsetTop; while (obj = obj.offsetParent) { ary[0] += obj.offsetLeft; ary[1] += obj.offsetTop; } return ary; }
+DropdownCtl.getPosition = function (obj) { if (null == obj) return new Array(); var ary = new Array(); ary[0] = obj.offsetLeft; ary[1] = obj.offsetTop; while (obj = obj.offsetParent) { ary[0] += obj.offsetLeft; ary[1] += obj.offsetTop; } return ary; }
 
-TxJsCtl.getScrollPosition = function (target) {
+DropdownCtl.getScrollPosition = function (target) {
     var left = 0; var top = 0;
     var funContinue = function (tar) {
         if (!tar.parentNode) return false;
@@ -109,7 +109,7 @@ TxJsCtl.getScrollPosition = function (target) {
 	
     return { x: left, y: top };
 }
-TxJsCtl.GetScroolObj = function (target) {
+DropdownCtl.GetScroolObj = function (target) {
     var result = target;
     if (typeof (result.parentNode) == "object")
         result = result.parentNode;
@@ -128,7 +128,7 @@ TxJsCtl.GetScroolObj = function (target) {
     }
     return $(result).add($(document));
 }
-TxJsCtl.GetControlSettingInfo = function (obj, eve) {
+DropdownCtl.GetControlSettingInfo = function (obj, eve) {
     var set = new Object();
     var zoom = 1;
 
@@ -136,15 +136,15 @@ TxJsCtl.GetControlSettingInfo = function (obj, eve) {
         zoom = top.DetectZoom.zoom();
     }
     if (eve != null) {
-        var poz = TxJsCtl.getPosition(obj);
-        var scroll = TxJsCtl.getScrollPosition(obj);
+        var poz = DropdownCtl.getPosition(obj);
+        var scroll = DropdownCtl.getScrollPosition(obj);
         var x = 0;
         var y = 0;
         var IsChrome = navigator.userAgent.toLowerCase().indexOf('chrome') != -1;
         var IsEdge = navigator.userAgent.toLowerCase().indexOf('edge') != -1;
         //var IsAir = navigator.userAgent.toLowerCase().indexOf('adobeair') != -1;
         
-        if (TxJsCtl.isIE() || $.browser.opera || IsEdge) {
+        if (DropdownCtl.isIE() || $.browser.opera || IsEdge) {
             x = (eve.screenX ? eve.screenX : window.event.screenX) - top.screenLeft * zoom;
             y = (eve.screenY ? eve.screenY : window.event.screenY) - top.screenTop * zoom;
 	        if(IsEdge) y+=5;
@@ -158,7 +158,7 @@ TxJsCtl.GetControlSettingInfo = function (obj, eve) {
         else if ($.browser.safari) {
             var diffY = top.window.outerHeight - top.window.innerHeight * zoom + self.screenTop;
             var diffX = top.window.outerWidth - top.window.innerWidth * zoom + self.screenLeft;
-            if (TxJsCtl.isIpadIpohne()) {
+            if (DropdownCtl.isIpadIpohne()) {
                 x = eve.screenX;
                 y = eve.screenY;
             }
@@ -194,7 +194,7 @@ TxJsCtl.GetControlSettingInfo = function (obj, eve) {
         var b = (eve.clientY ? eve.clientY : window.event.clientY) - poz[1];
         x = x - a - scroll.x;
 		y = y - b - scroll.y;		
-        //if (!TxJsCtl.isIE()) {
+        //if (!DropdownCtl.isIE()) {
         if (window != top) {
             var scrollTop = parseInt(document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset);
             var scrollLeft = parseInt(document.body.scrollLeft || document.documentElement.scrollLeft || window.pageXOffset);
@@ -283,15 +283,15 @@ TxJsCtl.GetControlSettingInfo = function (obj, eve) {
 
     return set;
 }
-TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
+DropdownCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
     var selText = set.IsCombo ? obj.val() : (obj[0].selectedIndex == -1 ? "" : (obj[0].options[obj[0].selectedIndex].text + ""));
     if (set.MultiSelect == true) {
         var selectText = new Array();
         var selectValue = new Array();
         for (var i = 0, j = obj[0].options.length; i < j; i++) {
             if (obj[0].options[i].selected) {
-				if (obj[0].options[i].value == TxJsCtl.ITEM_VALUE_SELECTALL)
-					selectText.push(TxJsCtl.ITEM_TITLE_SELECTALL);
+				if (obj[0].options[i].value == DropdownCtl.ITEM_VALUE_SELECTALL)
+					selectText.push(DropdownCtl.ITEM_TITLE_SELECTALL);
 				else
 					selectText.push(obj[0].options[i].text);
                 selectValue.push(obj[0].options[i].value);
@@ -322,7 +322,7 @@ TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
         html += "<div class='dropdown_proxytext_Combo' style=\"width:100%;\"><input type='text' value=\"" + val + "\" class='dropdown_searchinput dropdown_searchinput_combo' ></input></div>";
     }
     else {
-        html += '<div class="dropdown_proxytext" style=\"width:100%;\" value="' + val + '" title="' + TxJsCtl.HtmlEncode(selText) + '">' + TxJsCtl.HtmlEncode(selText) + '</div>';
+        html += '<div class="dropdown_proxytext" style=\"width:100%;\" value="' + val + '" title="' + DropdownCtl.HtmlEncode(selText) + '">' + DropdownCtl.HtmlEncode(selText) + '</div>';
     }
 	if (set.MultiSelect == true && set.ClearAll == true && set.IsEnable!=false){
 		html += '<a id="lnkClearTxt" href="javascript:void(0);" class="searchbox-cleartxt tx-icon-btn" title="Clear all selection"><span class="tx-icon tx-i-red-close"></span></a>';
@@ -350,7 +350,7 @@ TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
     if (set.NeedSetPosition) {
         proxy.width(set.ClientWidth - 2);
         proxy.css({ 'padding': 0 });
-        if (TxJsCtl.isIE())
+        if (DropdownCtl.isIE())
             proxy.find("DIV").width(set.ClientWidth - 17-6);
         else
             proxy.find("DIV").width(set.ClientWidth - 21 - 3);
@@ -447,24 +447,24 @@ TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
     };
     //var setting = {};
 	proxy.bind("click", function (e) {
-		TxJsCtl._cancelBubble(e);
+		DropdownCtl._cancelBubble(e);
         if (set.IsEnable == false) return;
         var dropdown = $('#dropdown_' + obj.attr("id"), top.document.body);
         if (dropdown.length > 0 && dropdown[0].style.display != "none") {
-            if (TxJsCtl.PreDropdownHideFun) {
-                TxJsCtl.PreDropdownHideFun();
-                delete TxJsCtl.PreDropdownHideFun;
-                TxJsCtl.PreDropdownHideFun = null;
+            if (DropdownCtl.PreDropdownHideFun) {
+                DropdownCtl.PreDropdownHideFun();
+                delete DropdownCtl.PreDropdownHideFun;
+                DropdownCtl.PreDropdownHideFun = null;
             }
             return false;
         }
         var showdropdown = function () {
-            var setting = TxJsCtl.GetControlSettingInfo(proxy[0], e);
+            var setting = DropdownCtl.GetControlSettingInfo(proxy[0], e);
             for (var i in set) setting[i] = set[i];
             setting.IsNewCtl = true;
             setting.Proxy = proxy;
             setting.ClientWidth = set.ClientWidth;
-            TxJsCtl.DisplayDropdown(obj, set.Ids, set.Names, e, setting, scrollObj);
+            DropdownCtl.DisplayDropdown(obj, set.Ids, set.Names, e, setting, scrollObj);
         };
         if (set.Ids == null || set.Names == null || 
             typeof parent.support_coowner_event !== 'undefined' && parent.support_coowner_event &&
@@ -480,7 +480,7 @@ TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
         }
 		
     }).bind("keydown", function (e) {
-		TxJsCtl._cancelBubble(e);
+		DropdownCtl._cancelBubble(e);
         if (set.IsEnable == false) return;
         val = proxy.find("DIV").attr("value");
         var getcurrentindex = function (start, key) {
@@ -514,7 +514,7 @@ TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
                 }
                 if (searchIndex == -1) searchIndex = 0;
                 if (searchIndex > -1 && searchIndex < set.Ids.length - 1) {
-                    proxy.find("DIV").html(TxJsCtl.HtmlEncode(set.Names[searchIndex + 1]));
+                    proxy.find("DIV").html(DropdownCtl.HtmlEncode(set.Names[searchIndex + 1]));
                     val = set.Ids[searchIndex + 1];
                     select(val, set.Names[searchIndex + 1]);
                 }
@@ -529,7 +529,7 @@ TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
                 }
                 if (searchIndex == -1) searchIndex = 0;
                 if (searchIndex > -1 && searchIndex < set.Ids.length - 1) {
-                    proxy.find("DIV").html(TxJsCtl.HtmlEncode(set.Names[searchIndex + 1]));
+                    proxy.find("DIV").html(DropdownCtl.HtmlEncode(set.Names[searchIndex + 1]));
                     select("", set.Names[searchIndex + 1]);
                 }
             }
@@ -544,7 +544,7 @@ TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
                     }
                 }
                 if (searchIndex > 0) {
-                    proxy.find("DIV").html(TxJsCtl.HtmlEncode(set.Names[searchIndex - 1]));
+                    proxy.find("DIV").html(DropdownCtl.HtmlEncode(set.Names[searchIndex - 1]));
                     val = set.Ids[searchIndex - 1];
                     select(val, set.Names[searchIndex - 1]);
                 }
@@ -558,7 +558,7 @@ TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
                     }
                 }
                 if (searchIndex > 0) {
-                    proxy.find("DIV").html(TxJsCtl.HtmlEncode(set.Names[searchIndex - 1]));
+                    proxy.find("DIV").html(DropdownCtl.HtmlEncode(set.Names[searchIndex - 1]));
                     select("", set.Names[searchIndex - 1]);
                 }
             }
@@ -572,7 +572,7 @@ TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
                 }
             }
             if (searchIndex > -1) {
-                proxy.find("DIV").html(TxJsCtl.HtmlEncode(set.Names[searchIndex]));
+                proxy.find("DIV").html(DropdownCtl.HtmlEncode(set.Names[searchIndex]));
                 val = set.Ids[searchIndex];
                 select(val, set.Names[searchIndex]);
             }
@@ -581,12 +581,12 @@ TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
         var gotoindex = function (gindex) {
             if (gindex > -1 && gindex < set.Ids.length) {
                 if (!set.IsCombo) {
-                    proxy.find("DIV").html(TxJsCtl.HtmlEncode(set.Names[gindex]));
+                    proxy.find("DIV").html(DropdownCtl.HtmlEncode(set.Names[gindex]));
                     val = set.Ids[gindex];
                     select(val, set.Names[gindex]);
                 }
                 else {
-                    proxy.find("DIV").html(TxJsCtl.HtmlEncode(set.Names[gindex]));
+                    proxy.find("DIV").html(DropdownCtl.HtmlEncode(set.Names[gindex]));
                     select("", set.Names[gindex]);
                 }
             }
@@ -730,7 +730,7 @@ TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
     });
 	
 	$("#lnkClearTxt", proxy).click(function(e){
-		TxJsCtl._cancelBubble(e);
+		DropdownCtl._cancelBubble(e);
         if (set.IsEnable == false) return;
 		$(".dropdown_proxytext", proxy).html("").attr("title", "");
 		set._SelectValue.splice(0, set._SelectValue.length);
@@ -746,11 +746,11 @@ TxJsCtl.InitDropdown = function (obj, set, scrollObj, ongetdata) {
 	});
 	
 }
-TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
-    if (TxJsCtl.PreDropdownHideFun) {
-        TxJsCtl.PreDropdownHideFun();
-        delete TxJsCtl.PreDropdownHideFun;
-        TxJsCtl.PreDropdownHideFun = null;
+DropdownCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
+    if (DropdownCtl.PreDropdownHideFun) {
+        DropdownCtl.PreDropdownHideFun();
+        delete DropdownCtl.PreDropdownHideFun;
+        DropdownCtl.PreDropdownHideFun = null;
     }
 
     if (!set.IsNewCtl) obj.hide();
@@ -764,7 +764,7 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
     var TimeID = null;
     var blurhander = function (ev) {
         isfocus = false;
-        TxJsCtl._cancelBubble(e);
+        DropdownCtl._cancelBubble(e);
         if (timer) clearTimeout(timer);
         timer = setTimeout(function () {
             if (timer) clearTimeout(timer);
@@ -773,7 +773,7 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
     };
     var focushander = function (ev) {
         isfocus = true;
-        TxJsCtl._cancelBubble(e);
+        DropdownCtl._cancelBubble(e);
         if (timer) clearTimeout(timer);
     };
     var dropdown = $('#dropdown_' + obj.attr("id"), top.document.body);
@@ -889,11 +889,11 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
         dropdown.find("INPUT.dropdown_ckb").each(function (i) {
             this.checked = isallchecked;
         });
-        TxJsCtl._cancelBubble(e);
+        DropdownCtl._cancelBubble(e);
         oncheck(e);
     };
     var oncheck = function (e) {
-        TxJsCtl._cancelBubble(e);
+        DropdownCtl._cancelBubble(e);
         var selectText = set._SelectText;
         var selectValue = set._SelectValue;
         var tar = e.target;
@@ -902,8 +902,8 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
         }
 		/*
 		var v = $(tar).val();
-		if (v == TxJsCtl.ITEM_VALUE_SELECTALL){
-			var index4SelectAll = findinoption(obj[0], TxJsCtl.ITEM_VALUE_SELECTALL);
+		if (v == DropdownCtl.ITEM_VALUE_SELECTALL){
+			var index4SelectAll = findinoption(obj[0], DropdownCtl.ITEM_VALUE_SELECTALL);
 			if (index4SelectAll >= 0){
 				var isallchecked = tar.checked;
 				dropdown.find("INPUT.dropdown_ckb").each(function (i) {
@@ -927,7 +927,7 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
         else */
 		if ($(tar).attr("class") == "dropdown_selectall") {
             dropdown.find("INPUT.dropdown_ckb").each(function (i) {
-                var nIndex = TxJsCtl.FindInArray(selectValue, $(this).val());
+                var nIndex = DropdownCtl.FindInArray(selectValue, $(this).val());
                 if (this.checked) {
                     if (nIndex == -1) {
                         selectText.push($(this).parent().parent().attr("title"));
@@ -951,32 +951,32 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
                 selectValue.push($(tar).val());
             }
             else {
-                var nIndex = TxJsCtl.FindInArray(selectValue, $(tar).val());
+                var nIndex = DropdownCtl.FindInArray(selectValue, $(tar).val());
                 if (nIndex > -1) {
                     selectText.splice(nIndex, 1);
                     selectValue.splice(nIndex, 1);
                 }
             }
 			/* "select all" item 
-			var index4SelectAll = findinoption(obj[0], TxJsCtl.ITEM_VALUE_SELECTALL);
+			var index4SelectAll = findinoption(obj[0], DropdownCtl.ITEM_VALUE_SELECTALL);
 			if (index4SelectAll>=0){
-				var $elChecked = dropdown.find("INPUT.dropdown_ckb[value!='" + TxJsCtl.ITEM_VALUE_SELECTALL + "']:checked");
-				var $elAll = dropdown.find("INPUT.dropdown_ckb[value!='" + TxJsCtl.ITEM_VALUE_SELECTALL + "']");
+				var $elChecked = dropdown.find("INPUT.dropdown_ckb[value!='" + DropdownCtl.ITEM_VALUE_SELECTALL + "']:checked");
+				var $elAll = dropdown.find("INPUT.dropdown_ckb[value!='" + DropdownCtl.ITEM_VALUE_SELECTALL + "']");
 				if ($elChecked.length == $elAll.length && $elChecked.length > 0){
 					selectText = [$(tar).parent().parent().attr("title")];
 					selectValue = [v];
-					dropdown.find("INPUT.dropdown_ckb[value='" + TxJsCtl.ITEM_VALUE_SELECTALL + "']").each(function(){this.indeterminate=false;this.checked=true;});
+					dropdown.find("INPUT.dropdown_ckb[value='" + DropdownCtl.ITEM_VALUE_SELECTALL + "']").each(function(){this.indeterminate=false;this.checked=true;});
 					obj[0].options[index4SelectAll].selected = true;
 				}
 				else{
 					if ($elChecked.length == 0){
-						dropdown.find("INPUT.dropdown_ckb[value='" + TxJsCtl.ITEM_VALUE_SELECTALL + "']").each(function(){this.indeterminate=false;this.checked=false;});
+						dropdown.find("INPUT.dropdown_ckb[value='" + DropdownCtl.ITEM_VALUE_SELECTALL + "']").each(function(){this.indeterminate=false;this.checked=false;});
 					}
 					else{
-						dropdown.find("INPUT.dropdown_ckb[value='" + TxJsCtl.ITEM_VALUE_SELECTALL + "']").each(function(){this.indeterminate=true;});
+						dropdown.find("INPUT.dropdown_ckb[value='" + DropdownCtl.ITEM_VALUE_SELECTALL + "']").each(function(){this.indeterminate=true;});
 					}
 					obj[0].options[index4SelectAll].selected = false;
-					var nIndex = TxJsCtl.FindInArray(selectValue, TxJsCtl.ITEM_VALUE_SELECTALL);
+					var nIndex = DropdownCtl.FindInArray(selectValue, DropdownCtl.ITEM_VALUE_SELECTALL);
 					if (nIndex > -1) {
 						selectText = [];
 						selectValue = [];
@@ -993,13 +993,13 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
         set._SelectValue = selectValue;
         if (set.Proxy != null) {
 			var text = selectText.join(",");
-            set.Proxy.find("DIV").html(TxJsCtl.HtmlEncode(text)).attr("title", text);
+            set.Proxy.find("DIV").html(DropdownCtl.HtmlEncode(text)).attr("title", text);
 			if (text != "")
 				set.Proxy.find("#lnkClearTxt").show();
 			else
 				set.Proxy.find("#lnkClearTxt").hide();
         }
-		if (selectValue[0] != TxJsCtl.ITEM_VALUE_SELECTALL){
+		if (selectValue[0] != DropdownCtl.ITEM_VALUE_SELECTALL){
 			for (var i = 0, j = obj[0].options.length; i < j; i++) {
 				obj[0].options[i].selected = false;
 			}
@@ -1018,7 +1018,7 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
 			}
 		}
         //        for (var i = 0, j = obj[0].options.length; i < j; i++) {
-        //            if (TxJsCtl.IsInArray(selectValue, obj[0].options[i].value)) {
+        //            if (DropdownCtl.IsInArray(selectValue, obj[0].options[i].value)) {
         //                obj[0].options[i].selected = true;
         //            }
         //        }
@@ -1132,7 +1132,7 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
                 }
             }
             if (set.Proxy != null) {
-                set.Proxy.find("DIV").html(TxJsCtl.HtmlEncode($(this).attr("title").replace("\xa0\xa0\xa0\xa0", "")));
+                set.Proxy.find("DIV").html(DropdownCtl.HtmlEncode($(this).attr("title").replace("\xa0\xa0\xa0\xa0", "")));
                 set.Proxy.find("DIV").attr("title", $(this).attr("title").replace("\xa0\xa0\xa0\xa0", ""));
                 set.Proxy.find("DIV").attr("value", $(this).attr("value"));
             }
@@ -1469,7 +1469,7 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
         var index = -1;
         var showname = "";
         for (var i = 0, j = names.length; i < j; i++) {
-            showname = names[i]//TxJsCtl.HtmlEncode;
+            showname = names[i]//DropdownCtl.HtmlEncode;
             var isarray = false;
             if (typeof (showname) == "object") {
                 showname = showname[0];
@@ -1480,19 +1480,19 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
                 sids.push(ids[i]);
                 if (isarray) {
                     var sarray = new Array();
-                    sarray.push(TxJsCtl.HtmlEncode(showname.substr(0, index)) + "<font color='red'>" + TxJsCtl.HtmlEncode(showname.substr(index, keyword.length)) + "</font>" + TxJsCtl.HtmlEncode(showname.substr(index + keyword.length)));
+                    sarray.push(DropdownCtl.HtmlEncode(showname.substr(0, index)) + "<font color='red'>" + DropdownCtl.HtmlEncode(showname.substr(index, keyword.length)) + "</font>" + DropdownCtl.HtmlEncode(showname.substr(index + keyword.length)));
                     for (var m = 1, n = names[i].length; m < n; m++) {
                         sarray.push(m);
                     }
                     snames.push(sarray);
                 }
                 else {
-                    snames.push(TxJsCtl.HtmlEncode(showname.substr(0, index)) + "<font color='red'>" + TxJsCtl.HtmlEncode(showname.substr(index, keyword.length)) + "</font>" + TxJsCtl.HtmlEncode(showname.substr(index + keyword.length)));
+                    snames.push(DropdownCtl.HtmlEncode(showname.substr(0, index)) + "<font color='red'>" + DropdownCtl.HtmlEncode(showname.substr(index, keyword.length)) + "</font>" + DropdownCtl.HtmlEncode(showname.substr(index + keyword.length)));
                 }
             }
         }
     };
-    var searchclick = function (e) { if ($(this).val() == TxJsCtl.QuickSearchString) { $(this).val(""); $(this).css({ "color": "#000000" }); } TxJsCtl._cancelBubble(e); };
+    var searchclick = function (e) { if ($(this).val() == DropdownCtl.QuickSearchString) { $(this).val(""); $(this).css({ "color": "#000000" }); } DropdownCtl._cancelBubble(e); };
     var hide = function (e, needsetcombo) {
         document.body.onscroll = null;
         if (dropdown[0].style.display == "none") {
@@ -1548,7 +1548,7 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
             }
         }
 
-        if (TxJsCtl.isIE()) { $("object").css("visibility", "visible"); }
+        if (DropdownCtl.isIE()) { $("object").css("visibility", "visible"); }
         if (set.NeedHideSelect && set.SelectObject != null) {
             set.SelectObject.show();
         }
@@ -1560,8 +1560,8 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
         sids = null;
         snames = null;
         $("#dropdown_" + obj.attr("id"), top.document.body).remove();
-        delete TxJsCtl.PreDropdownHideFun;
-        TxJsCtl.PreDropdownHideFun = null;
+        delete DropdownCtl.PreDropdownHideFun;
+        DropdownCtl.PreDropdownHideFun = null;
         getpaginghtml = null;
         getpagehtml = null;
         searchclick = null;
@@ -1585,27 +1585,27 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
     this.HideDropDown = function (e) { try { hide(e) } catch (ex) { } };
 
     var getpaginghtml = function (index) {
-        var html = new TxJsCtl.StringBuilder();
+        var html = new DropdownCtl.StringBuilder();
         var isSearch = keyword != "";
         var allcount = (isSearch ? sids.length : ids.length);
         var j = allcount;
         var islastpage = true;
-        var count = j / TxJsCtl.NUMBER_PER_PAGE;
-        if (j > ((index + 1) * TxJsCtl.NUMBER_PER_PAGE)) {
-            j = (index + 1) * TxJsCtl.NUMBER_PER_PAGE;
+        var count = j / DropdownCtl.NUMBER_PER_PAGE;
+        if (j > ((index + 1) * DropdownCtl.NUMBER_PER_PAGE)) {
+            j = (index + 1) * DropdownCtl.NUMBER_PER_PAGE;
             islastpage = false;
         }
-        var tocount = (index + 1) * TxJsCtl.NUMBER_PER_PAGE;
+        var tocount = (index + 1) * DropdownCtl.NUMBER_PER_PAGE;
         if (tocount > allcount) tocount = allcount;
         html.appendFormat('<div style="padding:5px 0px 0px 0px;font-size:12px; color:#525252;"><img class="dropdown_page" src="/DevSuiteWebControl/style/img/page_first.gif" border="0" style="{0}" index="0" title="First Page" />', index > 0 ? "cursor:pointer;" : "");
         html.appendFormat('&nbsp;&nbsp;<img src="/DevSuiteWebControl/style/img/page_pre.gif" class="dropdown_page" border="0" index="{0}" style="{1}" title="Previous Page" />', index > 0 ? index - 1 : 0, index > 0 ? "cursor:pointer;" : "");
-        html.appendFormat('&nbsp;&nbsp;{1}-{2}&nbsp;&nbsp;of&nbsp;&nbsp;{0}', allcount, index * TxJsCtl.NUMBER_PER_PAGE, tocount);
+        html.appendFormat('&nbsp;&nbsp;{1}-{2}&nbsp;&nbsp;of&nbsp;&nbsp;{0}', allcount, index * DropdownCtl.NUMBER_PER_PAGE, tocount);
         html.appendFormat('&nbsp;&nbsp;<img src="/DevSuiteWebControl/style/img/page_next.gif" class="dropdown_page" border="0" index="{0}" style="{1}" title="Next Page" />', islastpage ? index : index + 1, islastpage ? "" : "cursor:pointer;");
         html.appendFormat('&nbsp;&nbsp;<img src="/DevSuiteWebControl/style/img/page_last.gif" class="dropdown_page" border="0" index="{0}" style="{1}" title="Last Page" /></div>', islastpage ? index : count, islastpage ? "" : "cursor:pointer;");
         return html.toString();
     }
     var getpagehtml = function (index) {
-        var html = new TxJsCtl.StringBuilder();
+        var html = new DropdownCtl.StringBuilder();
         var isSearch = keyword != "";
         var ismulticolumn = typeof (set.head) != "undefined";
         var haveselet = false;
@@ -1623,30 +1623,30 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
         if (ismulticolumn == true) {
             html.append('<tr><td class="dropdown_column" style="text-align:center;" nowrap >');
             for (var i = 0, j = set.head.length; i < j; i++) {
-                html.appendFormat('<div style="float:left;width:{0}; text-align:{2};font-weight:bold;">{1}</div>', set.head[i].width, TxJsCtl.HtmlEncode(set.head[i].name), set.head[i].align);
+                html.appendFormat('<div style="float:left;width:{0}; text-align:{2};font-weight:bold;">{1}</div>', set.head[i].width, DropdownCtl.HtmlEncode(set.head[i].name), set.head[i].align);
             }
             html.append('</td></tr>');
         }
         else if (set.MultiSelect && set.SelectAll) {
             html.append('<tr><td class="dropdown_column" style="text-align:left;" nowrap >');
-            html.appendFormat('<label class=\"cbx_wrap\"><input class="dropdown_selectall" id="dropdown_checkbox_selectall" type="checkbox" /><span></span></label><label for="dropdown_checkbox_selectall" >{0}</label></td></tr>', TxJsCtl.SelectAllString);
+            html.appendFormat('<label class=\"cbx_wrap\"><input class="dropdown_selectall" id="dropdown_checkbox_selectall" type="checkbox" /><span></span></label><label for="dropdown_checkbox_selectall" >{0}</label></td></tr>', DropdownCtl.SelectAllString);
         }
-		else if (set.MultiSelect && findinoption(obj[0], TxJsCtl.ITEM_VALUE_SELECTALL)>=0){
-			if (selectValue.length>0 && selectValue[0]==TxJsCtl.ITEM_VALUE_SELECTALL) {
-				html.appendFormat('<tr><td class="dropdown_item"  nowrap value="{0}" title="{2}"><label class=\"cbx_wrap\"><input class="dropdown_ckb" type="checkbox" id="dropdown_checkbox_{0}" value="{0}" checked="checked" /><span></span></label><label class="dropdown_ckb" for="dropdown_checkbox_{0}" style="width:100%;">{1}</label></td></tr>', TxJsCtl.ITEM_VALUE_SELECTALL, TxJsCtl.ITEM_TEXT_SELECTALL, TxJsCtl.ITEM_TITLE_SELECTALL);
+		else if (set.MultiSelect && findinoption(obj[0], DropdownCtl.ITEM_VALUE_SELECTALL)>=0){
+			if (selectValue.length>0 && selectValue[0]==DropdownCtl.ITEM_VALUE_SELECTALL) {
+				html.appendFormat('<tr><td class="dropdown_item"  nowrap value="{0}" title="{2}"><label class=\"cbx_wrap\"><input class="dropdown_ckb" type="checkbox" id="dropdown_checkbox_{0}" value="{0}" checked="checked" /><span></span></label><label class="dropdown_ckb" for="dropdown_checkbox_{0}" style="width:100%;">{1}</label></td></tr>', DropdownCtl.ITEM_VALUE_SELECTALL, DropdownCtl.ITEM_TEXT_SELECTALL, DropdownCtl.ITEM_TITLE_SELECTALL);
 			}
 			else {
-				html.appendFormat('<tr><td class="dropdown_item"  nowrap value="{0}" title="{2}"><label class=\"cbx_wrap\"><input class="dropdown_ckb" type="checkbox" id="dropdown_checkbox_{0}" value="{0}" /><span></span></label><label class="dropdown_ckb" for="dropdown_checkbox_{0}" style="width:100%;">{1}</label></td></tr>', TxJsCtl.ITEM_VALUE_SELECTALL, TxJsCtl.ITEM_TEXT_SELECTALL, TxJsCtl.ITEM_TITLE_SELECTALL);
+				html.appendFormat('<tr><td class="dropdown_item"  nowrap value="{0}" title="{2}"><label class=\"cbx_wrap\"><input class="dropdown_ckb" type="checkbox" id="dropdown_checkbox_{0}" value="{0}" /><span></span></label><label class="dropdown_ckb" for="dropdown_checkbox_{0}" style="width:100%;">{1}</label></td></tr>', DropdownCtl.ITEM_VALUE_SELECTALL, DropdownCtl.ITEM_TEXT_SELECTALL, DropdownCtl.ITEM_TITLE_SELECTALL);
 			}
 		}
 
         if (index > 0) {
-            html.appendFormat('<tr><td class="dropdown_pre" nowrap index="{0}"><img src="/DevSuiteWebControl/style/img/page_up3.gif" border="0" />&nbsp;' + TxJsCtl.PrevItemString + '</td></tr>', (index - 1));
+            html.appendFormat('<tr><td class="dropdown_pre" nowrap index="{0}"><img src="/DevSuiteWebControl/style/img/page_up3.gif" border="0" />&nbsp;' + DropdownCtl.PrevItemString + '</td></tr>', (index - 1));
         }
         var j = (isSearch ? sids.length : ids.length);
         var islastpage = true;
-        if (j > ((index + 1) * TxJsCtl.NUMBER_PER_PAGE)) {
-            j = (index + 1) * TxJsCtl.NUMBER_PER_PAGE;
+        if (j > ((index + 1) * DropdownCtl.NUMBER_PER_PAGE)) {
+            j = (index + 1) * DropdownCtl.NUMBER_PER_PAGE;
             islastpage = false;
         }
         var cid = 0;
@@ -1654,15 +1654,15 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
         var mname = null;
         var ctitle = "";
 
-        for (var i = index * TxJsCtl.NUMBER_PER_PAGE; i < j; i++) {
+        for (var i = index * DropdownCtl.NUMBER_PER_PAGE; i < j; i++) {
             cid = isSearch ? sids[i] : ids[i];
-			if (cid == TxJsCtl.ITEM_VALUE_SELECTALL) continue;
+			if (cid == DropdownCtl.ITEM_VALUE_SELECTALL) continue;
             if (ismulticolumn) {
-                cname = (isSearch ? snames[i][0] : names[i][0]) == "" ? "&nbsp;&nbsp;&nbsp;&nbsp;" : (isSearch ? snames[i][0] : TxJsCtl.HtmlEncode(names[i][0]));
+                cname = (isSearch ? snames[i][0] : names[i][0]) == "" ? "&nbsp;&nbsp;&nbsp;&nbsp;" : (isSearch ? snames[i][0] : DropdownCtl.HtmlEncode(names[i][0]));
                 mname = isSearch ? snames[i] : names[i];
             }
             else {
-                cname = (isSearch ? snames[i] : names[i]) == "" ? "&nbsp;&nbsp;&nbsp;&nbsp;" : (isSearch ? snames[i] : TxJsCtl.HtmlEncode(names[i]));
+                cname = (isSearch ? snames[i] : names[i]) == "" ? "&nbsp;&nbsp;&nbsp;&nbsp;" : (isSearch ? snames[i] : DropdownCtl.HtmlEncode(names[i]));
             }
             ctitle = cname.replace("<font color='red'>", "").replace("</font>", "");
             if (!haveselet && ((set.IsCombo && obj.val() == cname) || (!set.IsCombo && obj.val() == cid + ""))) {
@@ -1692,7 +1692,7 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
                 }
                 else {
                     if (set.MultiSelect) {
-                        if (TxJsCtl.IsInArray(selectValue, cid + "") || (selectValue.length>0 && selectValue[0]==TxJsCtl.ITEM_VALUE_SELECTALL)) {
+                        if (DropdownCtl.IsInArray(selectValue, cid + "") || (selectValue.length>0 && selectValue[0]==DropdownCtl.ITEM_VALUE_SELECTALL)) {
                             html.appendFormat('<tr><td class="dropdown_item"  nowrap value="{0}" title="{2}"><label class=\"cbx_wrap\"><input class="dropdown_ckb" type="checkbox" id="dropdown_checkbox_{0}" value="{0}" checked="checked" /><span></span></label><label class="dropdown_ckb" for="dropdown_checkbox_{0}" style="width:100%;">{1}</label></td></tr>', cid, cname, ctitle);
                         }
                         else {
@@ -1709,13 +1709,13 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
             html.appendFormat('<tr><td style="height:18px;padding:1px 0px 1px 8px;" >{0}</td></tr>', "No items");
         }
         if (!islastpage) {
-            html.appendFormat('<tr><td class="dropdown_next" nowrap index="{0}"><img src="/DevSuiteWebControl/style/img/page_down3.gif" border="0" />&nbsp;' + TxJsCtl.NextItemString + '</td></tr>', (index + 1));
+            html.appendFormat('<tr><td class="dropdown_next" nowrap index="{0}"><img src="/DevSuiteWebControl/style/img/page_down3.gif" border="0" />&nbsp;' + DropdownCtl.NextItemString + '</td></tr>', (index + 1));
         }
         html.append('</table>');
         return html.toString();
     };
     if (keyword != "") dosearch();
-    var html = new TxJsCtl.StringBuilder();
+    var html = new DropdownCtl.StringBuilder();
     var needshowbottom = false;
     var needshowsearch = true; //ids.length > 9;
     if (dropdown.length == 0) {
@@ -1724,7 +1724,7 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
 
     var getMaxlengthAttr = function (o) {
         var s = o.attr('maxlength');
-        if (TxJsCtl.isNumber(s)) {
+        if (DropdownCtl.isNumber(s)) {
             return "maxlength=\"" + s + "\"";
         }
         return "";
@@ -1746,9 +1746,9 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
         }
     }
     if (!set.IsCombo && needshowsearch)
-        html.appendFormat('<div class="dropdown_search" ><input type="text" class="dropdown_searchinput dropdown_searchinput_dropdown" ' + getMaxlengthAttr(obj) + ' style="{1}" value="{0}"></input><input type="text" class="dropdown_hide" style="width:0px;position:absolute; left:-9000px;"></input><div class="calclesearchicon"><img src="/DevSuiteWebControl/style/img/search_cancel.gif" style="cursor:pointer;" border="0" /></div></div>', keyword != "" ? keyword : TxJsCtl.QuickSearchString, keyword != "" ? "color:#000000;" : "color:#999999;");
+        html.appendFormat('<div class="dropdown_search" ><input type="text" class="dropdown_searchinput dropdown_searchinput_dropdown" ' + getMaxlengthAttr(obj) + ' style="{1}" value="{0}"></input><input type="text" class="dropdown_hide" style="width:0px;position:absolute; left:-9000px;"></input><div class="calclesearchicon"><img src="/DevSuiteWebControl/style/img/search_cancel.gif" style="cursor:pointer;" border="0" /></div></div>', keyword != "" ? keyword : DropdownCtl.QuickSearchString, keyword != "" ? "color:#000000;" : "color:#999999;");
 
-    html.appendFormat('<div class="dropdown_content" {2} style="{0}{1}overflow-x:hidden;">', (set.IsCombo || !needshowsearch) ? "border-top:#B0AFAF 1px solid;" : "", needshowbottom ? "" : "border-bottom:#B0AFAF 1px solid;", TxJsCtl.isIE() ? '' : 'tabindex="0"');
+    html.appendFormat('<div class="dropdown_content" {2} style="{0}{1}overflow-x:hidden;">', (set.IsCombo || !needshowsearch) ? "border-top:#B0AFAF 1px solid;" : "", needshowbottom ? "" : "border-bottom:#B0AFAF 1px solid;", DropdownCtl.isIE() ? '' : 'tabindex="0"');
     html.append(getpagehtml(0));
     html.append('</div>');
     html.appendFormat('<div class="dropdown_bottom" style="{0}">', needshowbottom ? "" : "display:none;");
@@ -1845,13 +1845,13 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
         var MAXH = 371;
         var MINH = 70;
         if (set.IsCombo) {
-            if (TxJsCtl.isIE())
+            if (DropdownCtl.isIE())
                 set.y -= 0;
             else
                 set.y -= 6;
         }
         else if (set.IsNewCtl) {
-            if (TxJsCtl.isIE())
+            if (DropdownCtl.isIE())
                 set.y = set.y + 25;
             else
                 set.y = set.y + 20;
@@ -1891,7 +1891,7 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
         if (!set.IsCombo && dh <= h) h = dh; 
         if (set.IsNewCtl) {
 			var IsEdge = navigator.userAgent.toLowerCase().indexOf('edge') != -1;
-			if (TxJsCtl.isIE() || $.browser.opera || IsEdge)
+			if (DropdownCtl.isIE() || $.browser.opera || IsEdge)
 				dropdown.css({ 'left': set.x, 'top': set.y - h - 1 });
 			else
 				dropdown.css({ 'left': set.x, 'top': set.y - h - 5 });
@@ -1969,7 +1969,7 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
     //$("input.dropdown_searchinput", dropdown).width(set.ClientWidth - 20);
     $("div.dropdown_bottom", dropdown).width(ddw-2);
     $("div.dropdown_search", dropdown).width(ddw-2);
-    dropdown.bind("click", function (e) { TxJsCtl._cancelBubble(e);});
+    dropdown.bind("click", function (e) { DropdownCtl._cancelBubble(e);});
     $("div.dropdown_content,input.dropdown_searchinput,div.dropdown_head,input.dropdown_hide", dropdown).bind('keydown', keydown).bind('keyup', keyup);
     if (set.IsCombo) {
         $("input.dropdown_searchinput", dropdown).bind('keyup', combokeyup);
@@ -1986,26 +1986,26 @@ TxJsCtl.DisplayDropdown = function (obj, ids, names, e, set, scrollObj) {
 		}
 	}
 	
-    if (TxJsCtl.isIE()) { $("object").css("visibility", "hidden"); }
+    if (DropdownCtl.isIE()) { $("object").css("visibility", "hidden"); }
     $(document).one('click', hide);
     $(window).bind("unload", hide);
-    if (!TxJsCtl.isIpadIpohne()) { document.body.onscroll = function (e) { hide(e); }; }
-    TxJsCtl.CheckFrameClick(top, 0, this.HideDropDown);
+    if (!DropdownCtl.isIpadIpohne()) { document.body.onscroll = function (e) { hide(e); }; }
+    DropdownCtl.CheckFrameClick(top, 0, this.HideDropDown);
 
-    if (scrollObj && scrollObj.length > 0 && !TxJsCtl.isIpadIpohne()) scrollObj.bind("scroll", hide);
-    TxJsCtl.PreDropdownHideFun = hide;
-    TxJsCtl._cancelBubble(e);
+    if (scrollObj && scrollObj.length > 0 && !DropdownCtl.isIpadIpohne()) scrollObj.bind("scroll", hide);
+    DropdownCtl.PreDropdownHideFun = hide;
+    DropdownCtl._cancelBubble(e);
     return false;
 }
-TxJsCtl.CheckFrameClick = function (w, depth, hander) {
-    TxJsCtl.AddEventToFrame(w, hander);
+DropdownCtl.CheckFrameClick = function (w, depth, hander) {
+    DropdownCtl.AddEventToFrame(w, hander);
     for (var i = 0, j = w.frames.length; i < j; i++) {
         if (depth < 15) {
-            TxJsCtl.CheckFrameClick(w.frames[i], ++depth, hander);
+            DropdownCtl.CheckFrameClick(w.frames[i], ++depth, hander);
         }
     }
 }
-TxJsCtl.AddEventToFrame = function (w, hander) {
+DropdownCtl.AddEventToFrame = function (w, hander) {
     try {
         if (typeof (w) == "undefined" || typeof (w.document) == "undefined" || typeof (w.document.body) == "undefined" || !w.document.body) {
             return;
@@ -2016,16 +2016,16 @@ TxJsCtl.AddEventToFrame = function (w, hander) {
 }
 
 
-TxJsCtl.defaults = {
+DropdownCtl.defaults = {
     multiple: false
 };
-TxJsCtl.Dropdown = function (obj, options) {
+DropdownCtl.Dropdown = function (obj, options) {
     if (obj.length <= 0) return;
-    var settings = $.extend({}, TxJsCtl.defaults, options);
+    var settings = $.extend({}, DropdownCtl.defaults, options);
     obj.each(function (index) {
         var dd = this;
-        var setting = TxJsCtl.GetControlSettingInfo(dd, null);
-        var scrollObj = TxJsCtl.GetScroolObj(dd);
+        var setting = DropdownCtl.GetControlSettingInfo(dd, null);
+        var scrollObj = DropdownCtl.GetScroolObj(dd);
         setting.MultiSelect = settings.multiple;
         setting.IsEnable    = settings.IsEnable;
 		if (typeof(settings.ClearAll)!='undefined') setting.ClearAll = settings.ClearAll;
@@ -2052,6 +2052,6 @@ TxJsCtl.Dropdown = function (obj, options) {
             setting.Names = names;
             setting.fromcache = false;
         }
-        TxJsCtl.InitDropdown($(dd), setting, scrollObj, null);
+        DropdownCtl.InitDropdown($(dd), setting, scrollObj, null);
     });
 }
