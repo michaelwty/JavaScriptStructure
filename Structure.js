@@ -1,3 +1,6 @@
+/**
+The Module Pattern
+**/
 var basketModule = (function() {
     var basket = []; //private
     return { //exposed to public
