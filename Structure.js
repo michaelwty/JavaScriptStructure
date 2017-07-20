@@ -65,6 +65,45 @@ var jpm = $.jPanelMenu({
     …
 });
 jpm.open( );
+
+----------------------------------------------------------------------
+var FeedReader = {
+ 
+    settings: {
+        feedItemsCount: 10,
+        url: 'http://someurl.com/news/feed/',
+        feedListing: $('div#feedListing'),
+        loadFeedButton: $('a.loadFeed')
+    },
+ 
+    init: function () {
+        FeedReader.showErrorIfSourceDead();
+        FeedReader.bindUI();
+    },
+ 
+    bindUI: function () {
+        FeedReader.settings.loadFeedButton.on('click', function ( e ) {
+            e.preventDefault();
+            FeedReader.fetchFeed();
+        });
+    },
+ 
+    showErrorIfSourceDead: function () {
+        if ( FeedReader.isSourceAlive( FeedReader.settings.url ) === false ) {
+            alert("The URL provided can't be used to fetch feed.");
+        }
+    },
+ 
+    isSourceAlive: function () {
+       // ...
+    },
+ 
+    fetchFeed: function () {
+        // Fetch feed from the `FeedReader.settings.url`
+        // Append the feed to the `FeedReader.settings.feedListing`
+    }
+};
+
 /****************************************************
                 Object Literal Notation
 ****************************************************/
