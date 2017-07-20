@@ -31,7 +31,40 @@ console.log(basketModule.getTotal());
 console.log(basketModule.basket);// (undefined as not inside the returned object)
 console.log(basket); //(only exists within the scope of the closure)
 
+-------------------------------------------------------------------------------------------
+(function($) {
+    $.jPanelMenu = function(options) {
+        var jpm = {
+            options: $.extend({
+                'animated': true,
+                'duration': 500,
+                'direction': 'left'
+            }, options),
+            openMenu: function( ) {
+                …
+                this.setMenuStyle( );
+            },
+            closeMenu: function( ) {
+                …
+                this.setMenuStyle( );
+            },
+            setMenuStyle: function( ) { … }
+        };
 
+        return {
+            open: jpm.openMenu,
+            close: jpm.closeMenu,
+            someComplexMethod: function( ) { … }
+        };
+    };
+})(jQuery);
+
+//API methods and properties will be available through the object returned from the plugin initialization.
+var jpm = $.jPanelMenu({
+    duration: 1000,
+    …
+});
+jpm.open( );
 /****************************************************
                 Object Literal Notation
 ****************************************************/
